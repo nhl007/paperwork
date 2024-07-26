@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.text__editor img {
+    overflow: auto;
+    display: inline-block;
+    width: 200px;
+    height: auto;
+    position: relative;
+    cursor: se-resize;
+
+}
+
+.text__editor div {
+    display: inline-block;
+    position: relative;
+
+}
+
+.text__editor {
+    white-space: pre-wrap;
+    /* CSS3 */
+    white-space: -moz-pre-wrap;
+    /* Firefox */
+    white-space: -pre-wrap;
+    /* Opera <7 */
+    white-space: -o-pre-wrap;
+    /* Opera 7 */
+    word-wrap: break-word;
+    @apply text-[#666666] border-[1px] border-[#C2C6CE] p-[10px] whitespace-pre-wrap rounded-md sm:rounded-[10px]
+}
+
+.text__editor div {
+    display: block;
+    max-width: max-content
+}
+
+.text__editor h1 {
+    font-size: 40px;
+}
+
+.text__editor h2 {
+    font-size: 24px;
+}
+
+@layer base {
+
+
+    @layer base {
+        * {
+            @apply m-0 p-0 box-border
+        }
+
+        img {
+            @apply box-border
+        }
+
+
+
+        .text__editor input {
+            @apply px-6 border-b-[2px] bg-transparent border-blue-500 text-blue-600
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            @apply bg-slate-400 rounded-xl;
+        }
+
+    }
+}
+
+@layer utilities {
+    .no_scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .no_scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+}
+
+.text__heading__1 {
+    font-size: 32px;
+    line-height: normal;
+    font-style: normal;
+    font-weight: 400;
+}
+
+.text__heading__2 {
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.text__heading__3 {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
