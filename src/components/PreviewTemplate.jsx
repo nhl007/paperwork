@@ -3,24 +3,38 @@ import { Document, Page, PDFViewer, StyleSheet } from "@react-pdf/renderer";
 import Html from "react-pdf-html";
 
 const PreviewTemplate = ({ html, showPreview }) => {
+  function replaceWhitespaceWithNbsp(htmlContent) {
+    let tempDiv = document.createElement("div");
+    tempDiv.innerHTML = htmlContent;
+
+    function processNode(node) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        node.nodeValue = node.nodeValue.replace(/ /g, "\u00A0");
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        for (let i = 0; i < node.childNodes.length; i++) {
+          processNode(node.childNodes[i]);
+        }
+      }
+    }
+
+    processNode(tempDiv);
+
+    return tempDiv.innerHTML;
+  }
+
+  const formattedHtml = replaceWhitespaceWithNbsp(html);
+
   const styles = StyleSheet.create({
-    page: {
-      paddingHorizontal: "12px",
-      paddingVertical: "48px",
-      color: "#000000",
+    body: {
+      padding: 10,
     },
   });
 
-  console.log(html);
-
-  const html2 = `<html>
-  <body>
-  <div>
-      ${html}
-  </div>
-  </body>
-</html>
-`;
+  const stylesheet = {
+    div: {
+      display: "inline",
+    },
+  };
 
   return (
     <div className=" z-[999] bg-black/60 w-screen h-full flex justify-center items-center fixed top-0 left-0">
@@ -32,8 +46,10 @@ const PreviewTemplate = ({ html, showPreview }) => {
       </button>
       <PDFViewer showToolbar width="100%" height="100%">
         <Document>
-          <Page style={styles.page}>
-            <Html>{html2}</Html>
+          <Page style={styles.body}>
+            <Html stylesheet={stylesheet} collapse={false}>
+              {formattedHtml}
+            </Html>
           </Page>
         </Document>
       </PDFViewer>

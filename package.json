@@ -12,6 +12,7 @@
   "dependencies": {
     "@react-pdf/renderer": "^3.4.4",
     "html2canvas": "^1.4.1",
+    "html2pdf.js": "^0.10.2",
     "install": "^0.13.0",
     "jspdf": "^2.5.1",
     "npm": "^10.8.2",
